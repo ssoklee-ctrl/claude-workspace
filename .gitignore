@@ -1,0 +1,39 @@
+# ── 민감 정보 (절대 업로드 금지) ──────────────────
+.env
+.env.*
+.env.local
+*.key
+*.pem
+*.p12
+id_rsa
+id_ed25519
+credentials
+credentials.json
+secrets.json
+
+# ── 개인 문서 / 이력서 ─────────────────────────────
+docs/resume_sample.pdf
+*.pdf
+
+# ── 자동 생성 파일 ────────────────────────────────
+docs/weather.txt
+
+# ── OS 자동 생성 ─────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+
+# ── 에디터 ───────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Python ───────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
