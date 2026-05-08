@@ -569,6 +569,79 @@
       nav { display: none; }
       .contact-row { flex-wrap: wrap; gap: 8px; }
     }
+
+    /* ─── LIGHT MODE VARIABLES ───────────────── */
+    html.light {
+      --bg:      #f5f2ec;
+      --surface: #ffffff;
+      --text:    #1a1a18;
+      --muted:   #8a8076;
+      --accent:  #5a8000;
+      --border:  #dedad2;
+    }
+
+    html.light body {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    html.light header.scrolled {
+      background: rgba(245,242,236,0.88);
+      border-bottom: 1px solid var(--border);
+    }
+
+    html.light .hero::before {
+      background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+    }
+
+    html.light .hero-bg-num {
+      color: rgba(90,128,0,0.06);
+    }
+
+    html.light .career-item {
+      border-top-color: var(--border);
+    }
+
+    html.light .skill {
+      background: #ebe8e0;
+      color: var(--text);
+    }
+
+    html.light .tag {
+      background: #ebe8e0;
+      color: var(--muted);
+    }
+
+    html.light .contact-row {
+      border-top-color: var(--border);
+    }
+
+    html.light footer {
+      border-top-color: var(--border);
+    }
+
+    /* ─── THEME TOGGLE BUTTON ────────────────── */
+    .theme-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      transition: color 0.25s, border-color 0.25s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .theme-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: rotate(20deg);
+    }
   </style>
 </head>
 <body>
@@ -582,6 +655,7 @@
       <a href="#about">소개</a>
       <a href="#career">경력</a>
       <a href="#contact">연락처</a>
+      <button class="theme-btn" id="themeBtn" aria-label="테마 전환" title="라이트/다크 모드">☀</button>
     </nav>
   </header>
 
@@ -760,6 +834,31 @@
   </footer>
 
   <script>
+    // ── Dark / Light mode toggle ──────────────────────
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeBtn');
+
+    function applyTheme(mode) {
+      if (mode === 'light') {
+        html.classList.add('light');
+        themeBtn.textContent = '☾';
+        themeBtn.title = '다크 모드로 전환';
+      } else {
+        html.classList.remove('light');
+        themeBtn.textContent = '☀';
+        themeBtn.title = '라이트 모드로 전환';
+      }
+    }
+
+    // 저장된 설정 불러오기 (없으면 다크가 기본값)
+    applyTheme(localStorage.getItem('theme') || 'dark');
+
+    themeBtn.addEventListener('click', () => {
+      const next = html.classList.contains('light') ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
+    });
+
     // ── Custom cursor ─────────────────────────────────
     const cursor = document.getElementById('cursor');
     let cx = -20, cy = -20;
